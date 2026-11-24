@@ -25,3 +25,14 @@ async function getKomikById(req, res) {
     }
 }
 
+async function createKomik(req, res) {
+    const { tittle, description, author } = req.body;
+    try {
+        const newKomik = await komik.create({ tittle, description, author });
+        res.status(201).json(newKomik);
+    } catch (err) {
+        console.error('Error creating komik:', err.message);
+        res.status(500).json({ error: 'Failed to create komik.' });
+    }
+}
+
